@@ -1,0 +1,389 @@
+    <!DOCTYPE html>
+    <html>
+    <body>
+
+    <p>Click to get started!</p>
+    
+    <!--Link to all CSS files -->
+    <link rel="stylesheet" href="buttons.css">
+    <link rel="stylesheet" href="displayscores.css">
+    <link rel="stylesheet" href="layout.css">
+    
+    <!-- make all buttons -->
+    <button id="addpoints" onclick="addPoints()" background-color:red>Add points</button>
+    
+    <button id="firstbuild" onclick="build1()" style="display:none;">Building 1. Cost x</button>
+    
+    <button id="secondbuild" onclick="build2()" style="display:none;">Building 2. Cost x</button>
+    
+    <button id="thirdbuild" onclick="build3()" style="display:none;">Building 3. Cost x</button>
+    
+    <button id="fourthbuild" onclick="build4()" style="display:none;">Building 4. Cost x</button>
+    
+    <button id="fifthbuild" onclick="build5()" style="display:none;">Building 5. Cost x</button>
+    
+    <br>
+    <p><b>Upgrades:</b></p>
+    
+    <button id="btn_multiply" onclick="firstx2()" style="display:none;">x2 Multiplier. Cost: 100</button>
+    
+    <button id="multiply2" onclick="secondx2()" style="display:none;">x2 Multiplier. Cost: 1000</button>
+    
+    <button id="multiply3" onclick="thirdx2()" style="display:none;">x2 Multiplier. Cost: 5000</button>
+    
+    <button id="firstbuildmulti1" onclick="build1multi1()" style="display:none;">Building 1 x2 multiplier. Cost x</button>
+    
+    <button id="secondbuildmulti1" onclick="build2multi1()" style="display:none;">Building 2 x2 multiplier. Cost x</button>
+    
+    <script>
+	
+	  //declare variables for points, multiplier, buy upgrade, b1 2 and 3 cost and count, make point updater
+    var points = 99999;
+    var clickcount = 0;
+    var pointMulti = 1;
+    var buyupgrade = 0;
+    var b1cost = 200;
+    var b1count = 0;
+    var b1multi = 1;
+    var b1pps = (b1count * 1) * b1multi;
+    var b2cost = 1000;
+    var b2count = 0;
+    var b2multi = 1
+    var b2pps = (b2count * 4) * b2multi;
+    var b3cost  = 2000;
+    var b3count = 0;
+    var b3multi = 1;
+    var b3pps = (b3count * 10) * b3multi;
+    var b4cost = 4500;
+    var b4count = 0;
+    var b4multi = 1;
+    var b4pps = (b4count * 24) * b4multi;
+    var b5cost = 10000;
+    var b5count = 0;
+    var b5multi = 1;
+    var b5pps = (b5count * 56) * b5multi;
+    var b1m1cost = 1500;
+    var b1m1count = 0;
+    var b2m1cost = 4000;
+    var b2m1count = 0;
+    var ppstotal = 0;
+    var pointsfromclick = 0;
+    var totalpoints = 0;
+    var totalbuild = 0;
+    var statupdate = setInterval(updatestats, 250);
+    var currentpoints = setInterval(pointupdate, 250);
+    
+    //clicking on main button to add points
+    function addPoints() {
+        points += pointMulti;
+        clickcount++;
+        pointsfromclick += pointMulti;
+        totalpoints += pointMulti;
+        document.getElementById("clickcount").innerHTML = "You have " + clickcount + " total clicks."
+        document.getElementById("pointsfromclick").innerHTML = "You have made " + pointsfromclick + " points from clicking."
+        document.getElementById("totalpointcount").innerHTML = "You have made " + totalpoints + " total points."
+        var pointsArea = document.getElementById("pointdisplay");
+        pointsArea.innerHTML = "You have " + Math.round(points) + " points!";
+            if(points >= 100 && buyupgrade == 0) {
+            var multiply_button = document.getElementById("btn_multiply");
+            multiply_button.style.display = "inline";
+        }
+    }
+    
+    //make logic for doubling addpoints
+    function firstx2() {
+      if (buyupgrade == 0) {
+        pointMulti *= 2;
+        buyupgrade++;
+        points -= 100;
+        var multiplierArea = document.getElementById("multidisplay");
+        multiplierArea.innerHTML = "Your multiplier is: " + pointMulti;
+        var multiply_button = document.getElementById("btn_multiply");
+        multiply_button.style.display = "none";
+        
+      //logic for displaying first building upgrade
+      if (buyupgrade == 1) {
+        var firstbuild = document.getElementById("firstbuild");
+        firstbuild.style.display = "inline";
+        firstbuild.innerText = "Building 1. Cost " + Math.round(b1cost);
+        
+        var show2ndx2 = document.getElementById("secondx2");
+        multiply2.style.display = "inline";
+      }
+      
+      }
+    }
+    
+    //displays total points
+    function pointupdate() {
+      document.getElementById("pointdisplay").innerHTML = "You have " + Math.round(points) + " points!";
+    }
+    
+    //what happens when you click first building button
+    function build1() {
+      if (points >= b1cost) {
+        points -= b1cost;
+        b1count++;
+        b1cost *= 1.10;
+        totalbuild++;
+        var build1add = setInterval(build1points, 1000);
+        updatepps();
+        //var b1multi = 1;
+        //var b1pps = (b1count * b1multi);
+        document.getElementById("b1").innerHTML = "You have " + b1count + " of building 1! Making " + b1pps + " points per second. Each building is making " + 1 * b1multi + " points per second!"
+        firstbuild.innerText = "Building 1. Cost " + Math.round(b1cost);
+        
+        //display second building
+        var secondbuild = document.getElementById("secondbuild");
+        secondbuild.style.display = "inline";
+        secondbuild.innerText = "Building 2. Cost " + Math.round(b2cost);
+        
+      }
+    }
+    
+    //what happens when you click second building button
+    function build2() {
+      if (points >= b2cost) {
+        points -= b2cost;
+        b2count++;
+        b2cost *= 1.10;
+        totalbuild++;
+        var build2add = setInterval(build2points, 1000);
+        updatepps();
+        //var b2pps = (b2count * 4) * b2multi;
+        document.getElementById("b2").innerHTML = "You have " + b2count + " of building 2! Making " + b2pps + " points per second. Each building is making " + 4 * b2multi + " points per second!"
+        secondbuild.innerText = "Building 2. Cost " + Math.round(b2cost);
+        
+        //display third building
+        var thirdbuild = document.getElementById("thirdbuild");
+        thirdbuild.style.display = "inline";
+        thirdbuild.innerText = "Building 3. Cost " + Math.round(b3cost);
+      }
+    }
+    
+    //what happens when you click third building button
+    function build3() {
+      if (points >= b3cost) {
+        points -= b3cost;
+        b3count++;
+        b3cost *= 1.10;
+        totalbuild++;
+        var build3add = setInterval(build3points, 1000);
+        updatepps();
+        //var b3pps = (b3count * 10) * b3multi;
+        document.getElementById("b3").innerHTML = "You have " + b3count + " of building 3! Making " + b3pps + " points per second. Each building is making " + 10 * b3multi + " points per second!"
+        thirdbuild.innerText = "Building 3. Cost " + Math.round(b3cost);
+        
+        //display fourth building
+        var fourthbuild = document.getElementById("fourthbuild");
+        fourthbuild.style.display = "inline";
+        fourthbuild.innerText = "Building 4. Cost " + Math.round(b4cost);
+        
+        //first building first multiplier
+        if (b1m1count == 0) {
+          var firstbuildmulti1 = document.getElementById("firstbuildmulti1");
+          firstbuildmulti1.style.display = "inline";
+          firstbuildmulti1.innerText = "Building 1 x2 multiplier. Cost: " + b1m1cost + ".";
+        }
+      }
+    }
+    
+    //what happens when you click on build4
+    function build4() {
+      if (points >= b4cost) {
+        points -= b4cost;
+        b4count++;
+        b4cost *= 1.10;
+        totalbuild++;
+        var build4add = setInterval(build4points, 1000);
+        updatepps();
+        document.getElementById("b4").innerHTML = "You have " + b4count + " of building 4! Making " + b4pps + " points per second. Each building is making " + 24 * b4multi + " points per second!"
+        fourthbuild.innerText = "Building 4. Cost " + Math.round(b4cost);
+        
+        //display fifth building
+        var fifthbuild = document.getElementById("fifthbuild");
+        fifthbuild.style.display = "inline";
+        fifthbuild.innerText = "Building 5. Cost " + Math.round(b5cost);
+        
+        //second building second multiplier
+        if (b2m1count == 0) {
+          var secondbuildmulti1 = document.getElementById("secondbuildmulti1");
+          secondbuildmulti1.style.display = "inline";
+          secondbuildmulti1.innerText = "Buildiing 2 x2 multiplier. Cost " + b2m1cost + ".";
+        }
+        
+      }
+    }
+    
+    function build5() {
+      if (points >= b5cost) {
+        points -= b5cost;
+        b5count++;
+        totalbuild++;
+        b5cost *= 1.10;
+        var build5add = setInterval(build5points, 1000);
+        updatepps();
+        document.getElementById("b5").innerHTML = "You have " + b5count + " of building 5! Making " + b5pps + " points per second. Each building is making " + 56 * b5multi + " points per second!"
+        fifthbuild.innerText = "Building 5. Cost " + Math.round(b5cost);
+      }
+    }
+    
+    //add points for build1
+    function build1points() {
+      points += (1 * b1multi);
+      totalpoints += (1 * b1multi);
+    }
+    
+    //add points for build2
+    function build2points() {
+      points += (4 * b2multi);
+      totalpoints += (4 * b2multi);
+    }
+    
+    //add points for build3
+    function build3points() {
+      points += (10 * b3multi);
+      totalpoints += (10 * b3multi);
+    }
+    
+    function build4points() {
+      points += (24 * b4multi);
+      totalpoints += (24 * b4multi);
+    }
+    
+    function build5points() {
+      points += (56 * b5multi);
+      totalpoints += (56 * b5multi);
+    }
+    
+    //second x2, display multiplier
+    function secondx2() {
+      if (buyupgrade == 1 && points >= 1000) {
+        pointMulti *= 2;
+        points -= 1000;
+        buyupgrade++;
+        document.getElementById("multidisplay").innerHTML = "Your multiplier is: " + pointMulti;
+        multiply2.style.display = "none";
+        
+        if (buyupgrade == 2 && 5000) {
+          multiply3.style.display = "inline";
+        }
+      }
+    }
+    
+    function thirdx2() {
+      if (buyupgrade == 2 && points >= 5000) {
+        pointMulti *= 2;
+        points -= 5000;
+        buyupgrade++;
+        document.getElementById("multidisplay").innerHTML = "Your multiplier is: " + pointMulti;
+        multiply3.style.display = "none";
+      }
+    }
+    
+    function build1multi1() {
+      if (points >= b1m1cost) {
+        points -= b1m1cost;
+        b1multi *= 2;
+        b1m1count++;
+        updatepps();
+        var build1multi1 = document.getElementById("firstbuildmulti1");
+        firstbuildmulti1.style.display = "none";
+        document.getElementById("b1").innerHTML = "You have " + b1count + " of building 1! Making " + b1pps + " points per second. Each building is making " + 1 * b1multi + " points per second!";
+      }
+    }
+    
+    function build2multi1() {
+      if (points >= b2m1cost) {
+        points -= b2m1cost;
+        b2multi *= 2;
+        b2m1count++;
+        updatepps();
+        var build2multi1 = document.getElementById("secondbuildmulti1");
+        secondbuildmulti1.style.display = "none";
+        document.getElementById("b2").innerHTML = "You have " + b2count + " of building 2! Making " + b2pps + " points per second. Each building is making " + 4 * b2multi + " points per second!";
+      }
+    }
+    
+    function updatepps(){
+      b1pps = (b1count * 1) * b1multi;
+      b2pps = (b2count * 4) * b2multi;
+      b3pps = (b3count * 10) * b3multi;
+      b4pps = (b4count * 24) * b4multi;
+      b5pps = (b5count * 56) * b5multi;
+      ppstotal = b1pps + b2pps + b3pps + b4pps + b5pps;
+      document.getElementById("ppstotal").innerHTML = "Your total points per second is " + ppstotal + "!";
+    }
+    
+    function updatestats() {
+      document.getElementById("totalpointcount").innerHTML = "You have made " + totalpoints + " total points."
+      document.getElementById("totalbuild").innerHTML = "You have " + totalbuild + " total buildings."
+    }
+    
+    function switchtab(evt, pagename) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(pagename).style.display = "block";
+      evt.currentTarget.className += "active";
+    }
+    </script>
+
+    <!-- make a div around all paragraphs displaying stats and display them -->
+    <div class="displayscores">
+      <div class="tab">
+        <button class="tablinks" onclick="switchtab(event, 'main')">Main Page</button>
+        <button class="tablinks" onclick="switchtab(event, 'stats')">Stats</button>
+        <button class="tablinks" onclick="switchtab(event, 'achievements')">Achievements</button>
+      </div>
+      
+      <div id="main" class="tabcontent">
+      <p id="pointdisplay"></p>
+      <p id="multidisplay"></p>
+      <p id="b1"></p>
+      <p id="b2"></p>
+      <p id="b3"></p>
+      <p id="b4"></p>
+      <p id="b5"></p>
+      <p id="ppstotal"></p>
+      </div>
+      
+      <div id="stats" class="tabcontent">
+      <p id="clickcount"></p>
+      <p id="pointsfromclick"></p>
+      <p id="totalpointcount"></p>
+      <p id="totalbuild"></p>
+      </div>
+      
+      <div id="achievements" class="tabcontent">
+      <!--<p id="idlater"></p>-->
+      <table height: 300px; width: 300px>
+        <tr>
+          <td align="center">Achievement has not been unlocked yet.</td>
+          <td align="center">Achievement has not been unlocked yet.</td>
+          <td align="center">Achievement has not been unlocked yet.</td>
+          <td align="center">Achievement has not been unlocked yet.</td>
+        </tr>
+        <tr>
+          <td align="center">Achievement has not been unlocked yet.</td>
+          <td align="center">Achievement has not been unlocked yet.</td>
+          <td align="center">Achievement has not been unlocked yet.</td>
+          <td align="center">Achievement has not been unlocked yet.</td>
+        </tr>
+        <tr>
+          <td align="center">Achievement has not been unlocked yet.</td>
+          <td align="center">Achievement has not been unlocked yet.</td>
+          <td align="center">Achievement has not been unlocked yet.</td>
+          <td align="center">Achievement has not been unlocked yet.</td>
+        </tr>
+      </table>
+      </div>
+    </div>
+    </body>
+    </html>
