@@ -8,18 +8,28 @@
     <link rel="stylesheet" href="combinedfiles.css">
     
     <!-- make all buttons -->
-    <button id="addpoints" onclick="addPoints()" background-color:red>Add points</button>
-    
-    <button id="firstbuild" onclick="build1()" style="display:none;">Building 1. Cost x</button>
-    
-    <button id="secondbuild" onclick="build2()" style="display:none;">Building 2. Cost x</button>
-    
-    <button id="thirdbuild" onclick="build3()" style="display:none;">Building 3. Cost x</button>
-    
-    <button id="fourthbuild" onclick="build4()" style="display:none;">Building 4. Cost x</button>
-    
-    <button id="fifthbuild" onclick="build5()" style="display:none;">Building 5. Cost x</button>
-    
+    <button id="addpoints" onclick="addPoints()" background-color:red>Slice some bread!</button>
+    <br>
+    <br>
+    <br>
+    <button id="firstbuild" onclick="build1()" style="display:none;">Bread slicer. Cost x</button>
+    <br>
+    <br>
+    <br>
+    <button id="secondbuild" onclick="build2()" style="display:none;">Sandwich bread machine. Cost x</button>
+    <br>
+    <br>
+    <br>
+    <button id="thirdbuild" onclick="build3()" style="display:none;">Crouton maker. Cost x</button>
+    <br>
+    <br>
+    <br>
+    <button id="fourthbuild" onclick="build4()" style="display:none;">Roll factory. Cost x</button>
+    <br>
+    <br>
+    <br>
+    <button id="fifthbuild" onclick="build5()" style="display:none;">Baguette oven. Cost x</button>
+    <br>
     <br>
     <p><b>Upgrades:</b></p>
     
@@ -29,9 +39,9 @@
     
     <button id="multiply3" onclick="thirdx2()" style="display:none;">x2 Multiplier. Cost: 5000</button>
     
-    <button id="firstbuildmulti1" onclick="build1multi1()" style="display:none;">Building 1 x2 multiplier. Cost x</button>
+    <button id="firstbuildmulti1" onclick="build1multi1()" style="display:none;">Sliced bread x2 multiplier. Cost x</button>
     
-    <button id="secondbuildmulti1" onclick="build2multi1()" style="display:none;">Building 2 x2 multiplier. Cost x</button>
+    <button id="secondbuildmulti1" onclick="build2multi1()" style="display:none;">Sandwich bread x2 multiplier. Cost x</button>
     
     <script>
 	
@@ -78,10 +88,10 @@
         pointsfromclick += pointMulti;
         totalpoints += pointMulti;
         document.getElementById("clickcount").innerHTML = "You have " + clickcount + " total clicks."
-        document.getElementById("pointsfromclick").innerHTML = "You have made " + pointsfromclick + " points from clicking."
-        document.getElementById("totalpointcount").innerHTML = "You have made " + totalpoints + " total points."
+        document.getElementById("pointsfromclick").innerHTML = "You have made " + pointsfromclick + " bread objects from clicking."
+        document.getElementById("totalpointcount").innerHTML = "You have made " + totalpoints + " total bread objects."
         var pointsArea = document.getElementById("pointdisplay");
-        pointsArea.innerHTML = "You have " + Math.round(points) + " points!";
+        pointsArea.innerHTML = "You have " + Math.round(points) + " bread objects!";
             if(points >= 100 && buyupgrade == 0) {
             var multiply_button = document.getElementById("btn_multiply");
             multiply_button.style.display = "inline";
@@ -103,7 +113,7 @@
       if (buyupgrade == 1) {
         var firstbuild = document.getElementById("firstbuild");
         firstbuild.style.display = "inline";
-        firstbuild.innerText = "Building 1. Cost " + Math.round(b1cost);
+        firstbuild.innerText = "Sliced bread maker. Cost " + Math.round(b1cost);
         
         var show2ndx2 = document.getElementById("secondx2");
         multiply2.style.display = "inline";
@@ -114,7 +124,7 @@
     
     //displays total points
     function pointupdate() {
-      document.getElementById("pointdisplay").innerHTML = "You have " + Math.round(points) + " points!";
+      document.getElementById("pointdisplay").innerHTML = "You have " + Math.round(points) + " bread objects!";
     }
     
     //what happens when you click first building button
@@ -128,13 +138,13 @@
         updatepps();
         //var b1multi = 1;
         //var b1pps = (b1count * b1multi);
-        document.getElementById("b1").innerHTML = "You have " + b1count + " of building 1! Making " + b1pps + " points per second. Each building is making " + 1 * b1multi + " points per second!"
-        firstbuild.innerText = "Building 1. Cost " + Math.round(b1cost);
+        document.getElementById("b1").innerHTML = "You have " + b1count + " bread slicers! Making " + b1pps + " slices of bread per second. Each building is making " + 1 * b1multi + " slices of bread per second!"
+        firstbuild.innerText = "Sliced bread maker. Cost " + Math.round(b1cost);
         
         //display second building
         var secondbuild = document.getElementById("secondbuild");
         secondbuild.style.display = "inline";
-        secondbuild.innerText = "Building 2. Cost " + Math.round(b2cost);
+        secondbuild.innerText = "Sandwich bread machine. Cost: " + Math.round(b2cost);
         
       }
     }
@@ -149,13 +159,13 @@
         var build2add = setInterval(build2points, 1000);
         updatepps();
         //var b2pps = (b2count * 4) * b2multi;
-        document.getElementById("b2").innerHTML = "You have " + b2count + " of building 2! Making " + b2pps + " points per second. Each building is making " + 4 * b2multi + " points per second!"
-        secondbuild.innerText = "Building 2. Cost " + Math.round(b2cost);
+        document.getElementById("b2").innerHTML = "You have " + b2count + " sandwich bread machines! Making " + b2pps + " sandwich buns per second. Each machine is making " + 4 * b2multi + " sandwich buns per second!"
+        secondbuild.innerText = "Sandwich bread machine. Cost " + Math.round(b2cost);
         
         //display third building
         var thirdbuild = document.getElementById("thirdbuild");
         thirdbuild.style.display = "inline";
-        thirdbuild.innerText = "Building 3. Cost " + Math.round(b3cost);
+        thirdbuild.innerText = "Crouton maker. Cost " + Math.round(b3cost);
       }
     }
     
@@ -169,19 +179,19 @@
         var build3add = setInterval(build3points, 1000);
         updatepps();
         //var b3pps = (b3count * 10) * b3multi;
-        document.getElementById("b3").innerHTML = "You have " + b3count + " of building 3! Making " + b3pps + " points per second. Each building is making " + 10 * b3multi + " points per second!"
-        thirdbuild.innerText = "Building 3. Cost " + Math.round(b3cost);
+        document.getElementById("b3").innerHTML = "You have " + b3count + " Crouton makers! Making " + b3pps + " croutons per second. Each crouton maker is making " + 10 * b3multi + " points per second!"
+        thirdbuild.innerText = "Crouton maker. Cost " + Math.round(b3cost);
         
         //display fourth building
         var fourthbuild = document.getElementById("fourthbuild");
         fourthbuild.style.display = "inline";
-        fourthbuild.innerText = "Building 4. Cost " + Math.round(b4cost);
+        fourthbuild.innerText = "Roll factory. Cost " + Math.round(b4cost);
         
         //first building first multiplier
         if (b1m1count == 0) {
           var firstbuildmulti1 = document.getElementById("firstbuildmulti1");
           firstbuildmulti1.style.display = "inline";
-          firstbuildmulti1.innerText = "Building 1 x2 multiplier. Cost: " + b1m1cost + ".";
+          firstbuildmulti1.innerText = " Sliced bread x2 multiplier. Cost: " + b1m1cost + ".";
         }
       }
     }
@@ -195,19 +205,19 @@
         totalbuild++;
         var build4add = setInterval(build4points, 1000);
         updatepps();
-        document.getElementById("b4").innerHTML = "You have " + b4count + " of building 4! Making " + b4pps + " points per second. Each building is making " + 24 * b4multi + " points per second!"
-        fourthbuild.innerText = "Building 4. Cost " + Math.round(b4cost);
+        document.getElementById("b4").innerHTML = "You have " + b4count + " roll factories! Making " + b4pps + " rolls per second. Each building is making " + 24 * b4multi + " rolls per second!"
+        fourthbuild.innerText = "Roll factory. Cost " + Math.round(b4cost);
         
         //display fifth building
         var fifthbuild = document.getElementById("fifthbuild");
         fifthbuild.style.display = "inline";
-        fifthbuild.innerText = "Building 5. Cost " + Math.round(b5cost);
+        fifthbuild.innerText = "Baguette oven. Cost " + Math.round(b5cost);
         
         //second building second multiplier
         if (b2m1count == 0) {
           var secondbuildmulti1 = document.getElementById("secondbuildmulti1");
           secondbuildmulti1.style.display = "inline";
-          secondbuildmulti1.innerText = "Buildiing 2 x2 multiplier. Cost " + b2m1cost + ".";
+          secondbuildmulti1.innerText = "Sandwich bread x2 multiplier. Cost " + b2m1cost + ".";
         }
         
       }
@@ -221,8 +231,8 @@
         b5cost *= 1.10;
         var build5add = setInterval(build5points, 1000);
         updatepps();
-        document.getElementById("b5").innerHTML = "You have " + b5count + " of building 5! Making " + b5pps + " points per second. Each building is making " + 56 * b5multi + " points per second!"
-        fifthbuild.innerText = "Building 5. Cost " + Math.round(b5cost);
+        document.getElementById("b5").innerHTML = "You have " + b5count + " baguette ovens! Making " + b5pps + " baguettes per second. Each building is making " + 56 * b5multi + " baguettes per second!"
+        fifthbuild.innerText = "Baguette oven. Cost " + Math.round(b5cost);
       }
     }
     
@@ -287,7 +297,7 @@
         updatepps();
         var build1multi1 = document.getElementById("firstbuildmulti1");
         firstbuildmulti1.style.display = "none";
-        document.getElementById("b1").innerHTML = "You have " + b1count + " of building 1! Making " + b1pps + " points per second. Each building is making " + 1 * b1multi + " points per second!";
+        document.getElementById("b1").innerHTML = "You have " + b1count + " bread slicers! Making " + b1pps + " slices of bread per second. Each building is making " + 1 * b1multi + " sliced of bread per second!";
       }
     }
     
@@ -299,7 +309,7 @@
         updatepps();
         var build2multi1 = document.getElementById("secondbuildmulti1");
         secondbuildmulti1.style.display = "none";
-        document.getElementById("b2").innerHTML = "You have " + b2count + " of building 2! Making " + b2pps + " points per second. Each building is making " + 4 * b2multi + " points per second!";
+        document.getElementById("b2").innerHTML = "You have " + b2count + " of sandwich bread makers! Making " + b2pps + " sandwich buns per second. Each building is making " + 4 * b2multi + " sandwich buns per second!";
       }
     }
     
@@ -310,7 +320,7 @@
       b4pps = (b4count * 24) * b4multi;
       b5pps = (b5count * 56) * b5multi;
       ppstotal = b1pps + b2pps + b3pps + b4pps + b5pps;
-      document.getElementById("ppstotal").innerHTML = "Your total points per second is " + ppstotal + "!";
+      document.getElementById("ppstotal").innerHTML = "Your total bread objects per second is " + ppstotal + "!";
     }
     
     function updatestats() {
